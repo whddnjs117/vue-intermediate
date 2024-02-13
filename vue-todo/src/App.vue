@@ -3,7 +3,7 @@
     <TodoHeader></TodoHeader>
     <TodoInput @addTodoItem="addOneItem"></TodoInput>
     <TodoList :propsdata="todoItems" @removeItem="removeOneItem" @toggleItem="toggleOneItem"></TodoList>
-    <TodoFooter></TodoFooter>
+    <TodoFooter @clearAll="clearItem"></TodoFooter>
   </div>
 </template>
 
@@ -33,6 +33,10 @@ export default {
       todoItem.completed = !todoItem.completed
       localStorage.removeItem(todoItem.item);
       localStorage.setItem(todoItem.item, JSON.stringify(todoItem))
+    },
+    clearItem : function() {
+      localStorage.clear();
+      this.todoItems = [];
     }
   },
   created : function() {
